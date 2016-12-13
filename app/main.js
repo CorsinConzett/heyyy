@@ -2,6 +2,7 @@ function cssVar(varName, value){
    document.documentElement.style.setProperty('--' + varName, value);
 }
 
+// -----------------------------------------------------------------------------
 var currentScroll = 0;
 var scrollViews = document.querySelectorAll('[class^="scroll-view-"');
 
@@ -9,8 +10,7 @@ var currentScrollViewIndex = 0;
 var currentScrollView = scrollViews[currentScrollViewIndex];
 currentScrollView.classList.add('active');
 
-window.addEventListener('mousewheel', function (e) {
-
+function scroll(e){
   var scroll = currentScroll;
 
   if (e.deltaY < 0) {
@@ -33,4 +33,39 @@ window.addEventListener('mousewheel', function (e) {
   currentScrollView = scrollViews[currentScrollViewIndex];
   currentScrollView.classList.add('active');
   currentScroll = scroll;
+}
+
+// -----------------------------------------------------------------------------
+
+window.addEventListener('mousewheel', scroll);
+
+// -----------------------------------------------------------------------------
+var yDown = null;
+
+window.addEventListener('touchstart', function(e){
+  yDown = e.touches[0].clientY;
+});
+
+window.addEventListener('touchmove', function(e){
+  if (!yDown) {
+    return;
+  }
+
+  var yUp = e.touches[0].clientY;
+
+  var yDiff = yDown - yUp;
+
+  if (Math.abs(yDiff) < 10) {
+    return;
+  }
+
+  if (yDiff > 0) {
+    scroll({
+      deltaY: 1
+    });
+  } else {
+    scroll({
+      deltaY: -1
+    });
+  }
 });
