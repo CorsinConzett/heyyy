@@ -37,7 +37,7 @@ function scroll(e){
 
 // -----------------------------------------------------------------------------
 
-window.addEventListener('mousewheel', scroll);
+window.addEventListener('wheel', scroll);
 
 // -----------------------------------------------------------------------------
 var yDown = null;
