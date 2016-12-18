@@ -43,7 +43,7 @@ window.addEventListener('wheel', scroll);
 var yDown = null;
 
 window.addEventListener('touchstart', function(e){
-  yDown = e.touches[0].clientY;
+  yDown = e.touches[0].clientY || touches[0].pageY;
 });
 
 window.addEventListener('touchmove', function(e){
@@ -52,7 +52,7 @@ window.addEventListener('touchmove', function(e){
   }
 
   var touches = e.touches || e.originalEvent.touches || e.originalEvent.changedTouches;
-  var yUp = touches[0].clientY;
+  var yUp = touches[0].clientY || touches[0].pageY;
   var yDiff = yDown - yUp;
 
   if (Math.abs(yDiff) < 10) {
