@@ -37,35 +37,41 @@ function scroll(e){
 
 // -----------------------------------------------------------------------------
 
-window.addEventListener('wheel', scroll);
+window.addEventListener('wheel', scroll, false);
 
+
+// Mobile bullshit
 // -----------------------------------------------------------------------------
-var yDown = null;
 
-window.addEventListener('touchstart', function(e){
-  yDown = e.touches[0].clientY || touches[0].pageY;
-});
+// code from: http://stackoverflow.com/questions/9038625/detect-if-device-is-ios
+function iOS() {
 
-window.addEventListener('touchmove', function(e){
-  if (!yDown) {
-    return;
+  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+  var iDevices = [
+    'iPad Simulator',
+    'iPhone Simulator',
+    'iPod Simulator',
+    'iPad',
+    'iPhone',
+    'iPod'
+  ];
+
+  for (var i = 0; i < iDevices.length; i++) {
+    if(userAgent.indexOf(iDevices[i]) > -1) return true;
   }
 
-  var touches = e.touches || e.originalEvent.touches || e.originalEvent.changedTouches;
-  var yUp = touches[0].clientY || touches[0].pageY;
-  var yDiff = yDown - yUp;
+  return false;
+}
 
-  if (Math.abs(yDiff) < 10) {
-    return;
-  }
+if(iOS()) {
+	 alert('iOS devices do not fucking work -.- pls go to desktop');
+}
 
-  if (yDiff > 0) {
-    scroll({
-      deltaY: 1
-    });
-  } else {
-    scroll({
-      deltaY: -1
-    });
-  }
+var mc = new Hammer(document.querySelector('main'));
+mc.get('pan').set({direction: Hammer.DIRECTION_VERTICAL});
+mc.on('pan', function(e){
+  scroll({
+    deltaY: e.deltaY * -1
+  });
 });
