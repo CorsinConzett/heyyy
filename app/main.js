@@ -51,8 +51,8 @@ window.addEventListener('touchmove', function(e){
     return;
   }
 
-  var yUp = e.touches[0].clientY;
-
+  var touches = e.touches || e.originalEvent.touches || e.originalEvent.changedTouches;
+  var yUp = touches[0].clientY;
   var yDiff = yDown - yUp;
 
   if (Math.abs(yDiff) < 10) {
