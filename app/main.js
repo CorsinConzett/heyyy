@@ -4,7 +4,7 @@ function cssVar(varName, value){
 
 // -----------------------------------------------------------------------------
 var currentScroll = 0;
-var scrollViews = document.querySelectorAll('[class^="scroll-view-"');
+var scrollViews = document.querySelectorAll('[class^="scroll-view-"]');
 
 var currentScrollViewIndex = 0;
 var currentScrollView = scrollViews[currentScrollViewIndex];
