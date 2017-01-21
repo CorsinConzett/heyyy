@@ -39,35 +39,6 @@ function scroll(e){
 
 window.addEventListener('wheel', scroll, false);
 
-
-// Mobile bullshit
-// -----------------------------------------------------------------------------
-
-// code from: http://stackoverflow.com/questions/9038625/detect-if-device-is-ios
-function iOS() {
-
-  var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-
-  var iDevices = [
-    'iPad Simulator',
-    'iPhone Simulator',
-    'iPod Simulator',
-    'iPad',
-    'iPhone',
-    'iPod'
-  ];
-
-  for (var i = 0; i < iDevices.length; i++) {
-    if(userAgent.indexOf(iDevices[i]) > -1) return true;
-  }
-
-  return false;
-}
-
-if(iOS()) {
-	 alert('iOS devices do not fucking work -.- pls go to desktop');
-}
-
 var mc = new Hammer(document.querySelector('main'));
 mc.get('pan').set({direction: Hammer.DIRECTION_VERTICAL});
 mc.on('pan', function(e){
